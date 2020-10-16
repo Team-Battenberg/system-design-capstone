@@ -13,7 +13,7 @@ const csvAllPhotosStringifier  = createCsvStringifier({
 })
 
 let readStream = fs.createReadStream('/Users/Kov37/Downloads/answers_photos.csv');
-let writeStream = fs.createWriteStream('/Users/Kov37/Downloads/answer_photos.csv');
+let writeStream = fs.createWriteStream('/Users/Kov37/SDCfiles/answers_photos.csv');
 
 class CsvCleaner extends Transform {
   constructor(options) {
@@ -22,9 +22,9 @@ class CsvCleaner extends Transform {
   _transform(chunk, encoding, next) {
     for (let key in chunk) {
       //white space
-      let trimKey = key.trim();
-      chunk[trimKey] = chunk[key];
-      if(key != trimKey) {
+      let trimmed = key.trim();
+      chunk[trimmed] = chunk[key];
+      if(key != trimmed) {
         delete chunk[key];
       }
     }
@@ -33,6 +33,7 @@ class CsvCleaner extends Transform {
     //filter non-numbers
     chunk.id = chunk.id.replace(/\D/g,'');
     chunk.answer_id = chunk.answer_id.replace(/\D/g,'');
+    chunk.url = chunk.url ? chunk.url : '';
     chunk  = csvAllPhotosStringifier.stringifyRecords([chunk]);
     this.push(chunk);
     next();
@@ -53,3 +54,5 @@ readStream
   .on('finish',  () => {
     console.log('All done!');
   });
+
+console.log('Done cleaning.')

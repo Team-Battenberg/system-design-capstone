@@ -17,7 +17,7 @@ const csvAllQuestionsStringifier = createCsvStringifier({
 });
 
 let readStream = fs.createReadStream('/Users/Kov37/Downloads/questions.csv');
-let writeStream = fs.createWriteStream('/Users/Kov37/Desktop/cleanQuestions.csv');
+let writeStream = fs.createWriteStream('/Users/Kov37/SDCfiles/cleanQuestions.csv');
 
 class CsvCleaner extends Transform {
   constructor(options) {
@@ -39,7 +39,7 @@ class CsvCleaner extends Transform {
     chunk.product_id = chunk.product_id.replace(/\D/g,'');
     chunk.reported = chunk.reported.replace(/\D/g,'');
     chunk.helpful = chunk.helpful.replace(/\D/g, '');
-    chunk  = csvAllAnswersStringifier.stringifyRecords([chunk]);
+    chunk  = csvAllQuestionsStringifier.stringifyRecords([chunk]);
     this.push(chunk);
     next();
   }
@@ -59,6 +59,7 @@ readStream
   .on('finish',  () => {
     console.log('All done!');
   });
+console.log('Done cleaning.')
 
 
 
