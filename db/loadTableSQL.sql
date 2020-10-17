@@ -27,6 +27,16 @@ create table if not exists allanswerphotos (
 	primary key(photo_id)
 );
 
+delete from allanswerphotos 
+where true;
+
+delete from allanswers 
+where true;
+
+delete from allquestions 
+where true;
+
+
 copy allanswers--(answer_id, question_id, body, date_written, answer_name, answer_email, reported, helpful)
 from '/Users/Kov37/Desktop/SDC/answers.csv'
 delimiter ','

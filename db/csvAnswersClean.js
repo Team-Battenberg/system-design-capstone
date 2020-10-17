@@ -3,7 +3,7 @@ const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
 const fs = require('fs');
 const Transform = require('stream').Transform;
 
-const MAX_LINE_SIZE = 100000;
+// const MAX_LINE_SIZE = 100000;
 const csvAllAnswersStringifier = createCsvStringifier({
   header: [
     {id: 'id', title: 'id'},
@@ -18,7 +18,7 @@ const csvAllAnswersStringifier = createCsvStringifier({
 });
 
 let readStream = fs.createReadStream('/Users/Kov37/Downloads/answers.csv');
-let writeStream = fs.createWriteStream('/Users/Kov37/SDCfiles/cleanAnswers.csv');
+let writeStream = fs.createWriteStream('/Users/Kov37/SDC/cleanAnswers.csv');
 
 class CsvCleaner extends Transform {
   constructor(options) {
@@ -33,23 +33,21 @@ class CsvCleaner extends Transform {
       if(key != trimKey) {
         delete chunk[key];
       }
-      console.log('Chunk is of type: ', typeof chunk);
-      console.log('Chunk.id is of type: ', typeof chunk.id);
     }
     this.line++;
 
     //cleaning each record
     //filter non-numbers
-    console.log('Line Number:', this.line, chunk);
-    if (this.line < MAX_LINE_SIZE) {
-      chunk.id = Number(chunk.id.replace(/\D/g,''));
-      chunk.question_id = chunk.question_id.replace(/\D/g,'');
-      chunk.reported = chunk.reported.replace(/\D/g,'');
-      chunk.helpful = chunk.helpful.replace(/\D/g, '');
-      chunk = csvAllAnswersStringifier.stringifyRecords([chunk]);
-      this.push(chunk);
-      next();
-    }
+    // console.log('Line Number:', this.line, chunk);
+    // if (this.line < MAX_LINE_SIZE) {
+    chunk.id = Number(chunk.id.replace(/\D/g,''));
+    chunk.question_id = chunk.question_id.replace(/\D/g,'');
+    chunk.reported = chunk.reported.replace(/\D/g,'');
+    chunk.helpful = chunk.helpful.replace(/\D/g, '');
+    chunk = csvAllAnswersStringifier.stringifyRecords([chunk]);
+    this.push(chunk);
+    next();
+    // }
   }
 }
 

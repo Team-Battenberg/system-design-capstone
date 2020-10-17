@@ -1,15 +1,14 @@
-const express = require('express');
-const path = require('path');
-const partials = require('express-partials');
-const bodyParser = require('body-parser');
+import express from 'express';
+import partials from 'express-partials';
+import { json, urlencoded } from 'body-parser';
 
 const app = express();
 
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
 app.use(partials());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 
 app.get("/",(req, res) => {
@@ -17,4 +16,4 @@ app.get("/",(req, res) => {
 });
 console.log("it executes");
 
-module.exports = app;
+export default app;

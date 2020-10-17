@@ -17,7 +17,7 @@ const csvAllQuestionsStringifier = createCsvStringifier({
 });
 
 let readStream = fs.createReadStream('/Users/Kov37/Downloads/questions.csv');
-let writeStream = fs.createWriteStream('/Users/Kov37/SDCfiles/cleanQuestions.csv');
+let writeStream = fs.createWriteStream('/Users/Kov37/SDC/cleanQuestions.csv');
 
 class CsvCleaner extends Transform {
   constructor(options) {

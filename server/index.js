@@ -1,6 +1,6 @@
-const app = require('./server.js');
+import { listen } from './server.js';
 
 
-app.listen(3001, () => {
+listen(3001, () => {
   console.log('listening on 3001');
 });
