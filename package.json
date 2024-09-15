@@ -1,0 +1,38 @@
+{
+  "name": "docker-helloworld",
+  "version": "1.1.0",
+  "description": "using docker",
+  "author": "kevin c (kchalumo@gmail.com)",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash && ./node_modules/.bin/jsdoc ./server -r -d docs",
+    "start": "nodemon --ignore node_modules server --watch",
+    "test": "",
+    "lint": "eslint ./"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "body-parser": "^1.15.0",
+    "csv": "^5.3.2",
+    "csv-parser": "^2.3.3",
+    "csv-writer": "^1.6.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-partials": "^0.3.0",
+    "lodash": "^4.17.4",
+    "mongoose": "^5.10.9",
+    "nodemon": "^2.0.5",
+    "request": "^2.34.0",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "jsdoc": "^3.5.3",
+    "mocha": "^2.4.5"
+  }
+}

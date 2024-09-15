@@ -1,0 +1,10 @@
+#had to put this line before WORKDIR
+FROM node:8.0
+RUN mkdir /server
+ADD . /server
+COPY . /server 
+WORKDIR /server
+RUN npm install
+
+EXPOSE 3031
+CMD ["node", "index.js"]
